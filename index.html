@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>life game</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            color: #00ff12;
+        }
+        input{
+            background-color: #000000;
+            color: #00ff12;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="1000" height="600"></canvas>
+<br />
+<input type="button" id="start" value="刷新" />
+<input type="button" id="end" value="开始" />
+<input type="button" id="clear" value="清空" />
+<br />
+设置刷新时间<input type="text" id="time" />
+<input type="button" id="tSet" value="设置" />
+设置细胞大小<input type="text" id="ceilWidth" />
+<input type="button" id="wSet" value="设置" />
+设置笔刷细胞<input type="text" id="ceilStyle" />
+<input type="button" id="sSet" value="设置">
+<script src="lifeGame.js"></script>
+</body>
+</html>
