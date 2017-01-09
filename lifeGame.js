@@ -28,7 +28,7 @@ function fn () {
         var start = false;
         var mouseDown = false;
         lifeCeil = Init.empty();
-        var rule = GameRule.Predator;
+        var rule = GameRule.Basic;
         var type = 1;
         Process.setRule(rule);
 
@@ -55,9 +55,11 @@ function fn () {
         });
 
         dom.sSet.addEventListener('click', function () {
-            var value = parseInt(dom.styleText.value);
+            var value = parseFloat(dom.styleText.value);
 
-            if (value <= rule.num) type = value;
+            if (value <= rule.num && value >= 0 && value%1 === 0) {
+                type = value;
+            }
         });
 
         dom.refresh.addEventListener('click', function () {
@@ -90,12 +92,12 @@ function fn () {
         function generate(e) {
             if (e.type === 'mousedown') {
                 mouseDown = true;
-                Draw.makeCeil(e.x, e.y, type);
+                Draw.makeCeil(e.layerX, e.layerY, type);
             } else if (e.type === 'mouseleave' || e.type === 'mouseup') {
                 mouseDown = false;
             } else {
                 if (mouseDown) {
-                    Draw.makeCeil(e.x, e.y, type);
+                    Draw.makeCeil(e.layerX, e.layerY, type);
                 }
             }
         }
@@ -149,7 +151,7 @@ function fn () {
         var random = function (num) {
             var arr = [];
             init(arr,nWidth,nHeight,function (i, j, arr) {
-                arr[i][j] = Math.floor(Math.random() * num);
+                arr[i][j] = Math.floor(Math.random() * (num + 1));
             });
             return arr;
         };
@@ -178,7 +180,7 @@ function fn () {
         var timeFunc = function () {
             cb(next);
         };
-        var tickSpace = 200;
+        var tickSpace = 60;
         var time_id;
 
         var startTick = function () {
@@ -223,7 +225,7 @@ function fn () {
                 }
             }
         };
-        Basic.num = 2;
+        Basic.num = 1;
         
         function Predator(oldArr, newArr) {
             this.producerCount = 0;
@@ -271,7 +273,7 @@ function fn () {
                 }
             }
         };
-        Predator.num = 3;
+        Predator.num = 2;
 
         return {
             Basic: Basic,
